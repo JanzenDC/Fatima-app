@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="../assets/free-dungeon-classic-5294164-445.png">
+    <title>Chemical Reaction</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        .cover {
+            background-image: url('../assets/campdire.gif');
+            background-size: cover;
+            background-position: center;
+            height: 100%;
+            position: relative;
+        }
+        .fade-in {
+            animation: fadeIn 2s ease-out;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body class="">
+
+<div class="cover flex justify-center items-center bg-black h-screen text-white">
+    <p id="scenario" class="text-[20px] font-bold italic text-center"></p>
+</div>
+<audio autoplay loop>
+    <source src="../assets/Dungeon Ambience 1 Minute Loop No Copyright (320).mp3" type="audio/mp3">
+    Your browser does not support the audio tag.
+</audio>
+<script>
+    // Define scenarios
+    const scenarios = [
+        "You quietly slip past the knight guarding your cell, heart racing with anticipation.",
+        "Every step feels like a victory as you navigate the narrow corridors, avoiding detection.",
+        "The flickering torches cast fleeting shadows, but you remain unseen, a ghost in the darkness.",
+        "The distant sounds of the castle fade into silence as you reach the exit, freedom within reach.",
+        "With one last glance back, you disappear into the night, leaving the dungeon behind forever."
+    ];
+
+
+    // Function to display a new scenario every 3 seconds with fade-in effect
+    function displayScenario() {
+        const scenarioElement = document.getElementById('scenario');
+        let index = 0;
+
+        const intervalId = setInterval(() => {
+            scenarioElement.textContent = scenarios[index];
+            scenarioElement.classList.add('fade-in');
+            setTimeout(() => {
+                scenarioElement.classList.remove('fade-in');
+            }, 2000);
+            index++;
+            if (index === scenarios.length) {
+                clearInterval(intervalId);
+                setTimeout(() => {
+                    window.location.href = "stage3Intro.html"; // Replace with your desired URL
+                }, 2000); // Redirect after 2 seconds of the last scenario
+            }
+        }, 3000);
+    }
+
+    // Call the function to start displaying scenarios
+    displayScenario();
+</script>
+
+
+
+</body>
+</html>

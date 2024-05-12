@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="../assets/free-dungeon-classic-5294164-445.png">
+    <title>Chemical Reaction</title>
+    <style>
+        /* Add any additional styles here */
+        .fade-in {
+            animation: fadeIn 2s ease-out;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="flex justify-center items-center text-center bg-[#2D2E44] h-screen text-white">
+    <div class="text-center">
+        <div class="w-full flex justify-center items-center">
+            <img src="../assets/image_processing20200813-5359-1dfxazm.gif" alt="image run" class="w-32"/>
+        </div>
+        <p id="scenario" class="p-3"></p>
+    </div>
+    
+</div>
+<audio autoplay loop>
+    <source src="../assets/Dungeon Ambience 1 Minute Loop No Copyright (320).mp3" type="audio/mp3">
+    Your browser does not support the audio tag.
+</audio>
+<script>
+    // Define scenarios
+    const scenarios = [
+        "Deep within the winding tunnels of the ancient dungeon, a lone figure made their way cautiously through the dimly lit passages.",
+        "Each step sent eerie echoes reverberating off the cold, stone walls, serving as a stark reminder of their solitude.",
+        "Ahead, a knight stood guard beside a heavy, iron door, silently beckoning the intruder forward.",
+        "As the adventurer drew closer, a palpable sense of unease settled over them, intensified by the thick, oppressive air that seemed to suffocate their every breath.",
+        "The flickering torches mounted along the walls cast erratic shadows, their dance an unsettling mockery of the intruder's plight."
+    ];
+
+
+    function displayScenario() {
+        const scenarioElement = document.getElementById('scenario');
+        let index = 0;
+
+        const intervalId = setInterval(() => {
+            scenarioElement.textContent = scenarios[index];
+            scenarioElement.classList.add('fade-in');
+            setTimeout(() => {
+                scenarioElement.classList.remove('fade-in');
+            }, 2000);
+            index++;
+            if (index === scenarios.length) {
+                clearInterval(intervalId);
+                setTimeout(() => {
+                    window.location.href = "stage2.html"; // Replace with your desired URL
+                }, 2000); // Redirect after 2 seconds of the last scenario
+            }
+        }, 5000);
+    }
+
+    // Call the function to start displaying scenarios
+    displayScenario();
+</script>
+
+
+
+</body>
+</html>

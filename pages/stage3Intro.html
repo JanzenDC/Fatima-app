@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="../assets/free-dungeon-classic-5294164-445.png">
+
+    <title>Chemical Reaction</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        .cover {
+            background-image: url('../assets/cover.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100%;
+            position: relative;
+        }
+        .cover img {
+            position: absolute;
+            bottom: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .cover img.fade-in {
+            opacity: 1;
+        }
+        @keyframes moveKnight {
+            0% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            100% { transform: translateX(-5px); }
+        }
+
+        .animate-knight {
+            animation: moveKnight 5s linear infinite;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="cover static">
+        <img src="../assets/knight.png" class="absolute bottom-0 w-[500px] h-[500px] md:right-[400px] animate-knight"/>
+
+        <div class="absolute bottom-0 w-full h-[120px] md:h-[100px] backdrop-blur-sm bg-black/30 p-3 overflow-x-hidden overflow-y-auto text-white">
+            <p id="typing-text"></p>
+            <button id="next-btn" style="display:none;">Next</button>
+        </div>
+    </div>
+    <audio autoplay loop>
+        <source src="../assets/[No Copyright] Fuzzeke - The Fantasy [Fairytail Trailer Music] (320).mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
+    </audio>
+    <script>
+        window.onload = function() {
+            document.querySelector('.cover img').classList.add('fade-in');
+        };
+        const texts = [
+            "Attention all knights! An unknown individual has breached our security and fled the premises!",
+            "We must act swiftly to locate and apprehend the intruder before they pose a threat to our operations.",
+            "Deploy all available resources and conduct a thorough search of the area.",
+            "The safety of our facility is paramount!",
+            "Failure to apprehend the intruder could have dire consequences. Move out immediately!"
+        ];
+
+        const typingText = document.getElementById('typing-text');
+        const nextButton = document.getElementById('next-btn');
+        let index = 0;
+
+        function type() {
+            if (index < texts[0].length) {
+                typingText.innerHTML += texts[0].charAt(index);
+                index++;
+                setTimeout(type, 50);
+            } else {
+                nextButton.style.display = "block";
+            }
+        }
+
+        function nextParagraph() {
+        index = 0;
+        typingText.innerHTML = "";
+        texts.shift();
+        if (texts.length > 0) {
+            type();
+        } else {
+            // Redirect to another page
+            window.location.href = "stage3Intro2.html"; // Replace "https://example.com" with your desired URL
+        }
+    }
+
+        type();
+
+        nextButton.addEventListener('click', nextParagraph);
+    </script>
+</body>
+</html>

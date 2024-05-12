@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="../assets/free-dungeon-classic-5294164-445.png">
+
+    <title>Chemical Reaction</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        .cover {
+            background-image: url('../assets/laboratory.jpeg');
+            background-size: cover;
+            background-position: center;
+            height: 100%;
+            position: relative;
+        }
+        .cover img {
+            position: absolute;
+            bottom: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .cover img.fade-in {
+            opacity: 1;
+        }
+        /* Modal styles */
+        .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal content */
+        .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+        }
+
+        /* Close button */
+        .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="cover static">
+        <img id="drVegapunkImage" src="../assets/dr.vegapunk.png" class="absolute bottom-0 w-[300px] h-[500px] md:right-[500px]"/>
+        <div class="absolute top-0 left-0 p-3 font-bold text-[32px] text-white" id="scoreDisplay">Score: 0</div>
+        <div class="absolute bottom-0 w-full h-[190px] md:h-[100px] backdrop-blur-sm bg-black/30 p-3 overflow-x-hidden overflow-y-auto text-white">
+            <p id="typing-text"></p>
+            <div id="question" style="display:none;">
+                <p id="question-text" class="text-[16px]"></p>
+                <div id="choices" class="">
+                    <button class="choice hover:bg-red-300 p-2 rounded " data-answer="a">A. Choice A</button><br>
+                    <button class="choice hover:bg-red-300 p-2 rounded" data-answer="b">B. Choice B</button><br>
+                    <button class="choice hover:bg-red-300 p-2 rounded" data-answer="c">C. Choice C</button>
+                </div>
+            </div>
+            <button id="next-btn" style="display:none;">Next</button>
+        </div>
+    </div>
+
+
+  
+    <script src="../script/laboratory.js"></script>
+</body>
+</html>

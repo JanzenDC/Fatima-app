@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="../assets/free-dungeon-classic-5294164-445.png">
+
+    <title>Chemical Reaction</title>
+</head>
+<body>
+    <div class="flex justify-center items-center h-screen static">
+        <div class="absolute md:bottom-3 md:left-2 top-2 left-3">
+            <iframe class="md:w-[360px] md:h-[215px] w-[350px] h-[150px]" src="https://www.youtube.com/embed/H1_hSUGOpWM" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div>
+            <div class="text-center flex justify-center gap-3 items-center">
+                <div class="p-5 mt-10">
+                    <h1>Try Again</h1><br>
+                    <p>Your score: </p><br>
+                    
+                    <p class="font-bold italic text-[100px]">
+                        <span id="score" class=""></span>/10
+                    </p>
+                </div>
+                <div class="md:block hidden">
+                    <img src="../assets/knight2.png" alt="knight2" class="w-[250px]"/>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+                <a class="cursor-pointer bg-green-600 text-white hover:bg-green-300 p-3 rounded text-center" href="../pages/rules.html">Try Again</a>
+                <a class="cursor-pointer bg-red-600 text-white hover:bg-red-300 p-3 rounded text-center button" href="../index.html">Quit</a>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <script>
+        function moveButton(event) {
+            const button = event.target;
+            const rect = button.getBoundingClientRect();
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
+            const offsetX = mouseX - rect.left - rect.width / 2;
+            const offsetY = mouseY - rect.top - rect.height / 2;
+            button.style.transition = "transform 0.3s ease";
+            button.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+        }
+        // Get the score from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const score = urlParams.get('score');
+
+        // Display the score
+        document.getElementById('score').textContent = score;
+    </script>
+</body>
+</html>

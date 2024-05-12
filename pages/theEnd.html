@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="../assets/free-dungeon-classic-5294164-445.png">
+    <title>Chemical Reaction</title>
+    <style>
+        /* Add any additional styles here */
+        .fade-out {
+            animation: fadeOut 2s ease-out forwards;
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="flex justify-center items-center bg-black h-screen text-white">
+    <div class="text-center">
+        <p class="md:text-[100px] text-[40px] font-bold fade-out">WELCOME TO BONUS ROUND</p>
+    </div>
+</div>
+
+<script>
+    // Redirect after 3 seconds
+    setTimeout(() => {
+        window.location.href = "wordsearch/wordsearch.html";
+    }, 5000);
+</script>
+
+</body>
+</html>
