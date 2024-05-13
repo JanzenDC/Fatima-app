@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chemistry Quiz</title>
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-200 py-12">
+  <div class="max-w-md mx-auto bg-white p-8 rounded shadow-md">
+    <h1 class="text-2xl font-semibold mb-6">Chemistry Quiz</h1>
+    <div id="quiz-container">
+      <!-- Quiz questions will be dynamically added here -->
+    </div>
+    <!-- Heart images to represent lives -->
+    <div id="lives-container" class="flex items-center mb-4">
+      <img src="../assets/heart.png" alt="Heart" class="h-6 w-6 mr-2" id="heart1">
+      <img src="../assets/heart.png" alt="Heart" class="h-6 w-6 mr-2" id="heart2">
+      <img src="../assets/heart.png" alt="Heart" class="h-6 w-6 mr-2" id="heart3">
+      <img src="../assets/heart.png" alt="Heart" class="h-6 w-6 mr-2" id="heart4">
+      <img src="../assets/heart.png" alt="Heart" class="h-6 w-6 mr-2" id="heart5">
+    </div>
+    <button id="submit-btn" class="bg-blue-500 text-white py-2 px-4 mt-4 rounded hover:bg-blue-600">Submit</button>
+  </div>
+
+  <!-- Bootstrap JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Quiz data
+    const questions = [
+      {
+        question: "What is a chemical reaction?",
+        options: ["A change in color", "A change in state", "A process that rearranges atoms to form new substances", "A change in temperature"],
+        answer: "c"
+      },
+      {
+        question: "Which of the following is not evidence of a chemical reaction?",
+        options: ["Formation of a precipitate", "Change in temperature", "Change in volume", "Change in odor"],
+        answer: "c"
+      },
+      {
+        question: "Which of the following is an example of a chemical change?",
+        options: ["Ice melting into water", "Water evaporating into steam", "Wood burning to produce ash", "Sugar dissolving in water"],
+        answer: "c"
+      },
+      {
+        question: "What is the law of conservation of mass?",
+        options: ["Mass cannot be created or destroyed in a chemical reaction", "Mass can be created but not destroyed in a chemical reaction", "Mass can be destroyed but not created in a chemical reaction", "Mass can change in any chemical reaction"],
+        answer: "a"
+      },
+      {
+        question: "Which of the following is a chemical equation?",
+        options: ["H2O → H + O", "2H2 + O2 → 2H2O", "H2O + CO2 → H2CO3", "NaCl + H2O → NaOH + HCl"],
+        answer: "b"
+      },
+      {
+        question: "What does the arrow in a chemical equation represent?",
+        options: ["The start of the reaction", "The end of the reaction", "The direction of the reaction", "The conversion of reactants to products"],
+        answer: "d"
+      },
+      {
+        question: "In a combustion reaction, what are the typical products?",
+        options: ["Carbon dioxide and water", "Oxygen and water", "Carbon dioxide and hydrogen", "Oxygen and carbon"],
+        answer: "a"
+      },
+      {
+        question: "What is the process of a solid changing directly into a gas called?",
+        options: ["Condensation", "Sublimation", "Evaporation", "Deposition"],
+        answer: "b"
+      },
+      {
+        question: "Which of the following statements is true about exothermic reactions?",
+        options: ["They absorb heat from the surroundings", "They release heat to the surroundings", "They do not involve any heat changes", "They always involve a decrease in temperature"],
+        answer: "b"
+      },
+      {
+        question: "What is a catalyst in a chemical reaction?",
+        options: ["A substance that speeds up a reaction without being consumed", "A substance that slows down a reaction without being consumed", "A substance that is consumed in the reaction", "A substance that increases the temperature of the reaction"],
+        answer: "a"
+      }
+    ];
+
+    let currentQuestion = 0;
+    let lives = 5;
+
+    const quizContainer = document.getElementById('quiz-container');
+    const livesContainer = document.getElementById('lives-container');
+    const submitBtn = document.getElementById('submit-btn');
+
+    function loadQuestion() {
+      const question = questions[currentQuestion];
+      const options = question.options.map((option, index) => `
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="question${currentQuestion}" id="option${index}" value="${String.fromCharCode(97 + index)}">
+          <label class="form-check-label" for="option${index}">${option}</label>
+        </div>
+      `).join('');
+
+      const questionHTML = `
+        <div class="mb-4">
+          <p class="font-semibold">${currentQuestion + 1}. ${question.question}</p>
+          ${options}
+        </div>
+      `;
+
+      quizContainer.innerHTML = questionHTML;
+    }
+
+    function updateLives() {
+      for (let i = 0; i < 5; i++) {
+        const heart = document.getElementById(`heart${i + 1}`);
+        if (i < lives) {
+          heart.src = "../assets/heart.png";
+        } else {
+          heart.src = "../assets/heart-empty.png";
+        }
+      }
+    }
+
+    function checkAnswer() {
+      const selectedOption = document.querySelector(`input[name="question${currentQuestion}"]:checked`);
+      if (!selectedOption) return; // No option selected
+
+      const userAnswer = selectedOption.value;
+      const correctAnswer = questions[currentQuestion].answer;
+
+      if (userAnswer === correctAnswer) {
+        alert("Correct!");
+      } else {
+        lives--;
+        updateLives();
+        if (lives === 0) {
+          endQuiz();
+          return;
+        }
+        alert("Incorrect!");
+      }
+
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        loadQuestion();
+      } else {
+        endQuiz();
+      }
+    }
+
+    function endQuiz() {
+      if (lives === 0) {
+        alert("Game Over! You've run out of lives.");
+        window.location.reload(); // Reload the window
+      } else {
+        alert("Congratulations! You've completed the quiz.");
+        window.location.href = "introductiontostage3.html.html"; // Redirect to success page
+      }
+    }
+
+    loadQuestion();
+    updateLives();
+
+    submitBtn.addEventListener('click', checkAnswer);
+  </script>
+</body>
+</html>

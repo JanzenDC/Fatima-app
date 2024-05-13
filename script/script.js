@@ -70,7 +70,8 @@ class Game{
         if (this.moveBlock(blockIdx)) {
             if (this.checkPuzzleSolved()) {
                 setTimeout(() => {
-                    window.location.href = "../pages/introductiontostage3.html";
+                    // window.location.href = "../pages/introductiontostage3.html";
+                    window.location.href = "../pages/quiz3intro.html";
                 }, 600);
             }
         }
