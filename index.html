@@ -66,10 +66,10 @@
       
     <div id="myModal" class="modal">
         <div class="modal-content">
-            <p>Are you sure you want to proceed?</p>
-            <div class="grid grid-cols-2 gap-1">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="redirectToGame()">Yes</button>
-                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onclick="hideModal()">No</button>
+            <p>Choose list of games</p>
+            <div class="">
+                <button class="bg-blue-500 hover:bg-blue-700 mt-4  w-full text-white font-bold py-2 px-4 rounded" onclick="redirectToGame()">Proceed to Story</button>
+                <button class="bg-green-500 w-full mt-4 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onclick="redirecttoURL()">Simulation Game</button>
             </div>
 
         </div>
@@ -87,6 +87,11 @@
         function redirectToGame() {
             // Redirect to another page
             window.location.href = "pages/rules.html";
+        }
+        
+        function redirecttoURL() {
+            // Replace 'http://example.com' with your desired URL
+            window.location.href = 'simulation.html';
         }
     </script>
 </body>

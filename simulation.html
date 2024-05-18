@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click the Elements to Create Compounds</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .element {
+            cursor: pointer;
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+            margin: 5px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .element:hover {
+            background-color: #f0f0f0;
+        }
+        .compound {
+            margin-top: 20px;
+        }
+        .element img {
+            width: 100%;
+            height: auto;
+        }
+        .btn-custom {
+            margin: 5px;
+            color: white;
+            font-size: 1.2em;
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+        .btn-combine {
+            background-color: #28a745;
+            border: none;
+        }
+        .btn-combine:hover {
+            background-color: #218838;
+        }
+        .btn-retry {
+            background-color: #dc3545;
+            border: none;
+        }
+        .btn-retry:hover {
+            background-color: #c82333;
+        }
+        .btn-help {
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-help:hover {
+            background-color: #0069d9;
+        }
+        .btn-redirect {
+            background-color: #b3ff00;
+            border: none;
+        }
+        .btn-redirect:hover {
+            background-color: #5a9101;
+        }
+        .iframe-container {
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+        }
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">Click the Elements to Create Compounds</h1>
+    <div class="row">
+        <div class="col-md-2 element" onclick="selectElement('H')">
+            <img src="assetsforsimulation/6255304.png" style="width: 42px;" alt="H">
+            <div>H</div>
+        </div>
+        <div class="col-md-2 element" onclick="selectElement('O')">
+          <img src="assetsforsimulation/oxygen.png" style="width: 42px;" alt="O">
+          <div>O</div>
+        </div>
+        <div class="col-md-2 element" onclick="selectElement('Na')">
+          <img src="assetsforsimulation/na.png" style="width: 42px;" alt="Na">
+            <div>Na</div>
+        </div>
+        <div class="col-md-2 element" onclick="selectElement('Cl')">
+            <img src="assetsforsimulation/cl.png" style="width: 42px;" alt="Cl">
+            <div>Cl</div>
+        </div>
+        <div class="col-md-2 element" onclick="selectElement('C')">
+            <img src="assetsforsimulation/carbon.png" style="width: 42px;" alt="C">
+            <div>C</div>
+        </div>
+    </div>
+
+    <div class="compound text-center">
+        <h3>Selected Elements: <span id="selected-elements"></span></h3>
+    </div>
+    
+    <div class="text-center">
+        <button class="btn btn-custom btn-combine" onclick="combineElements()">Combine</button>
+        <button class="btn btn-custom btn-retry" onclick="resetGame()">Retry</button>
+        <button class="btn btn-custom btn-help" onclick="showHelp()">Help</button>
+        <button class="btn btn-custom btn-redirect" onclick="redirecttoURL()">Go Back to Story Mode</button>
+    </div>
+
+    <!-- Iframe container for video -->
+    <div class="iframe-container">
+        <iframe src="https://www.youtube.com/embed/YJ4d_ZB-pAI" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="resultModal" tabindex="-1" role="dialog" aria-labelledby="resultModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="resultModalLabel">Result</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="resultMessage">
+                <!-- Result message will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Help Modal -->
+<div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="helpModalLabel">Help</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Select two elements and click "Combine" to see if you have created a compound.</p>
+                <p>Example combinations:</p>
+                <ul>
+                    <li>H + O = H₂O (Water)</li>
+                    <li>Na + Cl = NaCl (Salt)</li>
+                    <li>C + O = CO₂ (Carbon Dioxide)</li>
+                    <li>H + H = H₂ (Hydrogen Gas)</li>
+                    <li>C + H = CH₄ (Methane)</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    let selectedElements = [];
+
+    function selectElement(element) {
+        if (selectedElements.length < 2) {
+            selectedElements.push(element);
+            document.getElementById('selected-elements').innerText = selectedElements.join(' + ');
+        }
+    }
+
+    function redirecttoURL() {
+        // Replace 'http://example.com' with your desired URL
+        window.location.href = 'index.html';
+    }
+
+    function combineElements() {
+        if (selectedElements.length !== 2) {
+            showModal('Please select exactly two elements to combine.');
+            return;
+        }
+
+        const combination = selectedElements.join(' + ');
+        let resultMessage = '';
+
+        switch (combination) {
+            case 'H + O':
+            case 'O + H':
+                resultMessage = 'H₂O (Water)';
+                break;
+            case 'Na + Cl':
+            case 'Cl + Na':
+                resultMessage = 'NaCl (Salt)';
+                break;
+            case 'C + O':
+            case 'O + C':
+                resultMessage = 'CO₂ (Carbon Dioxide)';
+                break;
+            case 'H + H':
+                resultMessage = 'H₂ (Hydrogen Gas)';
+                break;
+            case 'C + H':
+            case 'H + C':
+                resultMessage = 'CH₄ (Methane)';
+                break;
+            default:
+                resultMessage = 'Failed combination. Try again!';
+        }
+
+        showModal(resultMessage);
+    }
+
+    function showModal(message) {
+        document.getElementById('resultMessage').innerText = message;
+        $('#resultModal').modal('show');
+    }
+
+    function resetGame() {
+        selectedElements = [];
+        document.getElementById('selected-elements').innerText = '';
+    }
+
+    function showHelp() {
+        $('#helpModal').modal('show');
+    }
+</script>
+</body>
+</html>
