@@ -6,15 +6,18 @@
     <title>Team Selection</title>
     <style>
         body {
-            background-color: black;
-            color: white;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background-image: url('assetsforsimulation/wallpaper_cover.png'); /* Replace 'path/to/your/image.jpg' with the path to your image */
+            background-size: cover; /* Cover the entire background */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Prevent the background image from repeating */
+            height: 100vh; /* Ensure the body covers the entire viewport height */
+            margin: 0; /* Remove default margins */
+            padding: 0; /* Remove default padding */
             justify-content: center;
-            height: 100vh;
-            margin: 0;
+            align-items: center;
+            text-align: center;
+            color: white;
+            font-family: Arial, sans-serif; 
         }
         h1 {
             margin-bottom: 50px;
@@ -31,21 +34,46 @@
             width: 150px;
             height: 150px;
         }
-        .team button {
-            background-color: black;
-            color: white;
-            border: 2px solid white;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .team button:hover {
-            background-color: white;
-            color: black;
-        }
+
+
         .team img:hover {
-            transform: scale(1.1); /* Enlarge the image on hover */
+            transform: scale(1.5); /* Enlarge the image on hover */
         }
+
+        .button-74 {
+            background-color: #fbeee0;
+            border: 2px solid #422800;
+            border-radius: 30px;
+            box-shadow: #422800 4px 4px 0 0;
+            color: #422800;
+            cursor: pointer;
+            display: inline-block;
+            font-weight: 600;
+            font-size: 18px;
+            padding: 0 18px;
+            line-height: 50px;
+            text-align: center;
+            text-decoration: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            }
+
+            .button-74:hover {
+            background-color: #fff;
+            }
+
+            .button-74:active {
+            box-shadow: #422800 2px 2px 0 0;
+            transform: translate(2px, 2px);
+            }
+
+            @media (min-width: 768px) {
+            .button-74 {
+                min-width: 120px;
+                padding: 0 25px;
+            }
+            }
     </style>
 </head>
 <body>
@@ -54,12 +82,12 @@
         <div class="team">
             <img src="assets/game1.png" alt="Blue Team">
             <h2>Story Mode</h2>
-            <button onclick="redirectTo('storymode.html')">Select</button>
+            <button class='button-74' onclick="redirectTo('storymode.html')">Select</button>
         </div>
         <div class="team">
             <img src="assets/game2.png" alt="Red Team">
             <h2>Simulation Game</h2>
-            <button onclick="redirectTo('simulation.html')">Select</button>
+            <button class='button-74' onclick="redirectTo('simulation.html')">Select</button>
         </div>
     </div>
 
