@@ -27,7 +27,7 @@ const texts = [
 
 const questions = [
     { question: "What is a chemical reaction?", answer: "c", choices: ["A. Reactant to product", "B. Physical change", "C. Substance transformation"] },
-    { question: "Which of the following is a product of photosynthesis?", answer: "c", choices: ["A. Oxygen", "B. Carbon dioxide", "C. Glucose"] },
+    { question: "Which of the following is a product of photosynthesis?", answer: "c", choices: ["A. Oxygen", "B. Glucose", "C. Carbon Dioxide"] },
     { question: "What type of bond forms between atoms in a covalent bond?", answer: "b", choices: ["A. Ionic", "B. Shared electrons", "C. Hydrogen"] },
     { question: "What is the chemical symbol for water?", answer: "b", choices: ["A. H2O", "B. H2O2", "C. HOH"] },
     { question: "What is the process by which a solid changes directly to a gas?", answer: "a", choices: ["A. Sublimation", "B. Evaporation", "C. Condensation"] },
