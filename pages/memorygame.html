@@ -46,8 +46,13 @@
     </style>
 </head>
 <body class="bg-gray-800 flex flex-col items-center justify-center min-h-screen">
+    <audio autoplay loop>
+        <source src="../assets/Pokemon RubySapphireEmerald- Littleroot Town.mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
+    </audio>
     <button id="start-button" class="mb-4 px-4 py-2 bg-green-500 text-white rounded">Start Game</button>
     <div id="timer" class="text-white mb-4 text-xl">Time: 0 seconds</div>
+    <div id="definition" class="text-white mb-4 text-xl hidden"></div>
     <div id="game" class="grid grid-cols-4 gap-4 hidden">
         <!-- Cards will be generated here -->
     </div>
@@ -59,17 +64,17 @@
         const timerElement = document.getElementById('timer');
         const nextPageButton = document.getElementById('next-page-button');
 
-        const cardImages = [
-            'periodictable/Sodium.png',
-            'periodictable/carbon.jpg',
-            'periodictable/clorine.jpg',
-            'periodictable/gold.png',
-            'periodictable/helium.jpg',
-            'periodictable/iron.jpg',
-            'periodictable/oxygen.jpg',
-            'periodictable/sulfur.jpg'
+        const cardData = [
+            { image: 'periodictable/Sodium.png', definition: 'Sodium: A soft, silver-white, highly reactive metal.' },
+            { image: 'periodictable/carbon.jpg', definition: 'Carbon: A nonmetal known for its many forms including diamond and graphite.' },
+            { image: 'periodictable/clorine.jpg', definition: 'Chlorine: A greenish-yellow gas with strong odor, used as a disinfectant.' },
+            { image: 'periodictable/gold.png', definition: 'Gold: A yellow precious metal, highly valued for use in jewelry and electronics.' },
+            { image: 'periodictable/helium.jpg', definition: 'Helium: A colorless, odorless, tasteless, non-toxic, inert gas.' },
+            { image: 'periodictable/iron.jpg', definition: 'Iron: A metal that is used extensively in construction and manufacturing.' },
+            { image: 'periodictable/oxygen.jpg', definition: 'Oxygen: A colorless, odorless reactive gas, essential for respiration.' },
+            { image: 'periodictable/sulfur.jpg', definition: 'Sulfur: A yellow crystalline solid, used in matches and fertilizers.' }
         ];
-        let cards = [...cardImages, ...cardImages];
+        let cards = [...cardData, ...cardData];
         let revealedCards = [];
         let matchedCards = [];
         let timer;
@@ -83,10 +88,11 @@
             return array;
         }
 
-        function createCard(image) {
+        function createCard(cardData) {
             const card = document.createElement('div');
             card.classList.add('card');
-            card.dataset.image = image;
+            card.dataset.image = cardData.image;
+            card.dataset.definition = cardData.definition;
 
             const cardInner = document.createElement('div');
             cardInner.classList.add('card-inner');
@@ -97,7 +103,7 @@
             const cardBack = document.createElement('div');
             cardBack.classList.add('card-back');
             const img = document.createElement('img');
-            img.src = image;
+            img.src = cardData.image;
             img.classList.add('w-full', 'h-full', 'object-cover');
             cardBack.appendChild(img);
 
@@ -123,9 +129,12 @@
 
         function checkMatch() {
             const [firstCard, secondCard] = revealedCards;
+            const definitionElement = document.getElementById('definition');
             if (firstCard.dataset.image === secondCard.dataset.image) {
                 matchedCards.push(firstCard, secondCard);
                 revealedCards = [];
+                definitionElement.textContent = firstCard.dataset.definition;
+                definitionElement.classList.remove('hidden');
                 if (matchedCards.length === cards.length) {
                     clearInterval(timer);
                     nextPageButton.classList.remove('hidden');
@@ -142,8 +151,8 @@
         function initializeGame() {
             gameContainer.innerHTML = '';
             cards = shuffle(cards);
-            cards.forEach(image => {
-                gameContainer.appendChild(createCard(image));
+            cards.forEach(cardData => {
+                gameContainer.appendChild(createCard(cardData));
             });
         }
 
