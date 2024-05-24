@@ -19,10 +19,6 @@ function changeImage() {
 
 const texts = [
     "Hi, I am Dr. Vegapunk. Chemical reactions are fascinating phenomena where atoms rearrange themselves to form new substances with different properties.",
-    // "These reactions occur when atoms collide with enough energy to break existing bonds and form new ones, resulting in the transformation of reactants into products.",
-    // "Understanding the mechanisms behind chemical reactions is crucial for various fields, including chemistry, materials science, and even biochemistry.",
-    // "In addition to their practical applications, chemical reactions also play a fundamental role in nature, driving processes such as photosynthesis, digestion, and the synthesis of essential biomolecules.",
-    // "As researchers continue to delve deeper into the world of chemical reactions, new discoveries and innovations are constantly reshaping our understanding and applications of chemistry."
 ];
 
 const questions = [
