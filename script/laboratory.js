@@ -27,7 +27,7 @@ const questions = [
     { question: "What type of bond forms between atoms in a covalent bond?", answer: "b", choices: ["A. Ionic", "B. Shared electrons", "C. Hydrogen"] },
     { question: "What is the chemical symbol for water?", answer: "b", choices: ["A. H2O", "B. H2O2", "C. HOH"] },
     { question: "What is the process by which a solid changes directly to a gas?", answer: "a", choices: ["A. Sublimation", "B. Evaporation", "C. Condensation"] },
-    { question: "Which gas is most abundant in Earth's atmosphere?", answer: "a", choices: ["A. Nitrogen", "B. Oxygen", "C. Carbon dioxide"] },
+    { question: "Which gas is most abundant in Earth's atmosphere?", answer: "a", choices: ["A. Oxygen", "B. Nitrogen", "C. Carbon dioxide"] },
     { question: "What is the pH of pure water?", answer: "b", choices: ["A. 5", "B. 10", "C. 7"] },
     { question: "What is the chemical formula for table salt?", answer: "c", choices: ["A. NaCl", "B. NaO", "C. NaCl2"] },
     { question: "What element has the chemical symbol 'Fe'?", answer: "a", choices: ["A. Silver", "B. Gold", "C. Iron"] },
